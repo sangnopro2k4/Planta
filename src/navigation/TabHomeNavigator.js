@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreen, NotificationScreen, SearchScreen, SettingScreen } from '../Screen';
-import Icon from 'react-native-vector-icons/Feather'
-import { appColors } from '../contants';
 import { Notification } from 'iconsax-react-native';
-import Octicons from 'react-native-vector-icons/Octicons'
+import React from 'react';
+import { View } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
+import Octicons from 'react-native-vector-icons/Octicons';
+import { HomeScreen, NotificationScreen, SearchScreen, SettingScreen } from '../Screen';
+import { appColors } from '../contants';
 const Tab = createBottomTabNavigator();
 
 const TabHomeNavigator = () => {

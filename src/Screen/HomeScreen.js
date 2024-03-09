@@ -1,11 +1,13 @@
-import { ImageBackground, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { appColors, globalStyles, height } from '../contants'
-import { RowComponent, TextComponent } from '../Component'
 import { ArrowRight } from 'iconsax-react-native'
+import React, { useEffect, useState } from 'react'
+import { FlatList, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
+import { GridviewComponent, ProductComponent, RowComponent, TextComponent } from '../Component'
+import { appColors, globalStyles, height } from '../contants'
+import { plants, plantas } from '../mock-data/plants'
 
 const HomeScreen = () => {
+
     return (
         <ScrollView style={[globalStyles.container]}>
             <ImageBackground
@@ -39,7 +41,46 @@ const HomeScreen = () => {
                     </RowComponent>
                 </View>
             </ImageBackground>
-            
+            <View style={
+                {
+                    paddingHorizontal: 24,
+                    paddingTop: 24,
+                    flex: 1
+                }
+            }>
+
+                <GridviewComponent
+                    data={plants}
+                    renderItems={item => <ProductComponent {...item} />}
+                    textNode={
+                        <TextComponent text='Cây trồng'
+                            color={appColors.blackLine}
+                            size={24}
+                            style={{ lineHeight: 34, fontWeight: '500' }}
+                        />
+                    }
+                    col={2}
+                    loadMore
+                    limitItem={4}
+                    loadMoreText='Xem thêm cây trồng'
+                />
+
+                <GridviewComponent
+                    data={plantas}
+                    renderItems={item => <ProductComponent type='planta' {...item} />}
+                    textNode={
+                        <TextComponent text='Chậu cây trồng'
+                            color={appColors.blackLine}
+                            size={24}
+                            style={{ lineHeight: 34, fontWeight: '500' }}
+                        />
+                    }
+                    col={2}
+                    loadMore
+                    loadMoreText='Xem thêm phụ kiện'
+                />
+
+            </View>
         </ScrollView>
     )
 }
