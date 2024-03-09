@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native"
+import { Dimensions, StatusBar, StyleSheet } from "react-native"
 
 export const appColors = {
     black: '#000000',
@@ -42,5 +42,5 @@ export const globalStyles = StyleSheet.create({
 })
 
 const { width, height } = Dimensions.get('window')
-
-export { width, height }
+const statusBarHeight = StatusBar.currentHeight
+export { width, height, statusBarHeight }

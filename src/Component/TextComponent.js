@@ -3,7 +3,7 @@ import React from 'react'
 import { globalStyles } from '../contants'
 
 const TextComponent = (props) => {
-    const { text, color, font, backgroundColor, size, style, type = 'text', onPress, children, numLine = 0 } = props
+    const { text, color, font, backgroundColor, size, style, type = 'text', onPress, children, numLine = 0, flex = 0 } = props
     return (
         <Text
             numberOfLines={numLine}
@@ -15,6 +15,7 @@ const TextComponent = (props) => {
                     fontFamily: font,
                     fontSize: size,
                     backgroundColor: backgroundColor,
+                    flex: flex
                 },
                 style
             ]}>{text}{children}</Text>

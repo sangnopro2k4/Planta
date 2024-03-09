@@ -7,9 +7,10 @@ import { appColors, globalStyles, height } from '../contants'
 import { plants, plantas } from '../mock-data/plants'
 
 const HomeScreen = () => {
-
     return (
-        <ScrollView style={[globalStyles.container]}>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={[globalStyles.container]}>
             <ImageBackground
                 style={styles.bg}
                 source={require('../assets/images/product-background.png')}>
@@ -48,7 +49,6 @@ const HomeScreen = () => {
                     flex: 1
                 }
             }>
-
                 <GridviewComponent
                     data={plants}
                     renderItems={item => <ProductComponent {...item} />}

@@ -1,16 +1,18 @@
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { TextComponent } from '.'
 import { appColors } from '../contants'
+import { NavigationContext } from '@react-navigation/native'
 
 const GridviewComponent = (props) => {
     const { data, renderItems, col, textNode, style, loadMore, loadMoreText, limitItem } = props
     const [plants, setPlants] = useState(data.slice(0, limitItem))
     const [isLoading, setIsLoading] = useState(false)
-
+    const navigation = useContext(NavigationContext)
+    
     const handleData = () => {
-        setIsLoading(true) 
-        setTimeout(() => { 
+        setIsLoading(true)
+        setTimeout(() => {
             setIsLoading(false)
             const numOfEle = data.length - plants.length - limitItem
             const size = numOfEle < limitItem ? data.length - plants.length : limitItem
@@ -23,9 +25,9 @@ const GridviewComponent = (props) => {
             {textNode}
             <View style={styles.container}>
                 {plants.map((item) => {
-                    return (<View key={item.id} style={{ width: 100 / col + '%' }}>
+                    return (<TouchableOpacity onPress={() => navigation.navigate('DetailScreen')} key={item.id} style={{ width: 100 / col + '%' }}>
                         {renderItems(item)}
-                    </View>)
+                    </TouchableOpacity>)
                 })}
             </View>
             {data.length != plants.length && !isLoading && loadMore && <TextComponent

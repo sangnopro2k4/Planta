@@ -4,6 +4,8 @@ import RowComponent from "./RowComponent"
 import SpaceComponent from "./SpaceComponent"
 import ProductComponent from "./ProductComponent"
 import GridviewComponent from "./GridviewComponent"
+import ToolBarComponent from "./ToolBarComponent"
+import ButtonComponent from "./ButtonComponent"
 
 export {
     TextComponent,
@@ -11,5 +13,7 @@ export {
     RowComponent,
     SpaceComponent,
     ProductComponent,
-    GridviewComponent
+    GridviewComponent,
+    ToolBarComponent,
+    ButtonComponent
 }

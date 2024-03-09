@@ -4,7 +4,13 @@ const plants = [
         name: 'Spider Plant',
         attribute: 'Ưa bóng',
         price: '250.000 VND',
-        img: require('../assets/mock-images/plant1.png')
+        img: require('../assets/mock-images/plant1.png'),
+        listImage: [
+            require('../assets/mock-images/plant1.png'),
+            require('../assets/mock-images/plant2.png'),
+            require('../assets/mock-images/plant3.png'),
+            require('../assets/mock-images/plant4.png')
+        ]
     },
     {
         id: 2,
