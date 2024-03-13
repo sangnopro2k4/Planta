@@ -15,7 +15,7 @@ const TextComponent = (props) => {
                     fontFamily: font,
                     fontSize: size,
                     backgroundColor: backgroundColor,
-                    flex: flex
+                    flex: flex ?? 0
                 },
                 style
             ]}>{text}{children}</Text>

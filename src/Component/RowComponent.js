@@ -10,7 +10,7 @@ const RowComponent = (props) => {
             justifyContent: justify ?? 'flex-start',
             flex: flex,
             width: width ?? 'auto',
-            height: height ?? 'a    uto'
+            height: height ?? 'auto'
         }, style]}>
             {children}
         </View>

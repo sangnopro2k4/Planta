@@ -1,10 +1,10 @@
 import { AddSquare, ArrowLeft2, ArrowRight2, MinusSquare, ShoppingCart, } from 'iconsax-react-native'
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
-import { ButtonComponent, RowComponent, SpaceComponent, TextComponent, ToolBarComponent } from '../Component'
+import { Image, StyleSheet, View } from 'react-native'
+import Swiper from 'react-native-swiper'
+import { ButtonComponent, RowComponent, TextComponent, ToolBarComponent } from '../Component'
 import { appColors, globalStyles, height } from '../contants'
 import { plants } from '../mock-data/plants'
-import Swiper from 'react-native-swiper'
 
 const DetailScreen = (props) => {
     const {navigation} = props
@@ -209,7 +209,6 @@ const DetailScreen = (props) => {
                             color: appColors.white,
                             fontWeight: '500',
                             fontSize: 16,
-
                         }}
                     />
                 </View>

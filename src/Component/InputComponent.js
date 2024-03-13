@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { appColors } from '../contants'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
 const InputComponent = (props) => {
 
     const {

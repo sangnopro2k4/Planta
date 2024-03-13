@@ -1,8 +1,8 @@
-import { View, Text } from 'react-native'
-import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import TabHomeNavigator from './TabHomeNavigator'
+import React from 'react'
+import CategoriesScreen from '../Screen/CategoriesScreen'
 import DetailScreen from '../Screen/DetailScreen'
+import TabHomeNavigator from './TabHomeNavigator'
 
 const MainStack = () => {
     const Stack = createNativeStackNavigator()
@@ -13,6 +13,7 @@ const MainStack = () => {
         }}>
             <Stack.Screen name='TabHome' component={TabHomeNavigator} />
             <Stack.Screen name='DetailScreen' component={DetailScreen} />
+            <Stack.Screen name='CategoryScreen' component={CategoriesScreen} />
         </Stack.Navigator>
     )
 }

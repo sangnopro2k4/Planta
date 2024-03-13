@@ -14,6 +14,19 @@ const LoginScreen = ({ navigation }) => {
     const [password, setpassword] = useState('')
     const [inValid, setinValid] = useState(false)
 
+    const handleLogin = async () => {
+        if (email === '' || password === '') {
+            setinValid(true)
+            return
+        } else {
+            setinValid(false)
+        }
+        const response = await fetch(`http://172.16.80.87:3000/authen?user=${email}&pass=${password}`)
+        const data = await response.json()
+        console.log(data)
+    }
+
+
     return (
         <ScrollView style={[globalStyles.container]}>
             <Image style={styles.logo} source={require('../assets/images/background-login.png')} />
@@ -68,7 +81,7 @@ const LoginScreen = ({ navigation }) => {
                     end={{ x: 1, y: 1 }}
                     style={{ width: '100%', height: 50, borderRadius: 15, marginBottom: 21 }}
                 >
-                    <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} onPress={() => setinValid(!inValid)}>
+                    <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} onPress={() => handleLogin()}>
                         <TextComponent
                             text='Đăng Nhập'
                             size={20}
@@ -102,7 +115,7 @@ const LoginScreen = ({ navigation }) => {
                     <Facebook width={32} height={32} />
                 </RowComponent>
 
-                <RowComponent style={{marginBottom: 10}}>
+                <RowComponent style={{ marginBottom: 10 }}>
                     <TextComponent text='Bạn không có tài khoản' />
                     <SpaceComponent width={7} />
                     <TextComponent text='Tạo tài khoản' color={appColors.green} type='link' onPress={() => navigation.navigate('SignupScreen')} />

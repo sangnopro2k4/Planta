@@ -5,24 +5,24 @@ import { appColors } from '../contants'
 import { NavigationContext } from '@react-navigation/native'
 
 const GridviewComponent = (props) => {
-    const { data, renderItems, col, textNode, style, loadMore, loadMoreText, limitItem } = props
+    const { data, renderItems, col, textNode, style, loadMore, loadMoreText, limitItem, showCate } = props
     const [plants, setPlants] = useState(data.slice(0, limitItem))
     const [isLoading, setIsLoading] = useState(false)
     const navigation = useContext(NavigationContext)
-    
+
     const handleData = () => {
         setIsLoading(true)
         setTimeout(() => {
             setIsLoading(false)
-            const numOfEle = data.length - plants.length - limitItem
-            const size = numOfEle < limitItem ? data.length - plants.length : limitItem
+            const numOfEle = data.length - plants.length
+            const size = numOfEle < limitItem ? numOfEle : limitItem
             setPlants([...data.slice(0, plants.length + size)])
         }, 2000)
     }
 
     return (
         <View style={style}>
-            {textNode}
+            {textNode && textNode}
             <View style={styles.container}>
                 {plants.map((item) => {
                     return (<TouchableOpacity onPress={() => navigation.navigate('DetailScreen')} key={item.id} style={{ width: 100 / col + '%' }}>
@@ -30,7 +30,9 @@ const GridviewComponent = (props) => {
                     </TouchableOpacity>)
                 })}
             </View>
-            {data.length != plants.length && !isLoading && loadMore && <TextComponent
+            {data.length != plants.length
+                && !isLoading && loadMore && !showCate
+                && <TextComponent
                 onPress={() => handleData()}
                 text={loadMoreText}
                 size={16}
@@ -50,6 +52,17 @@ const GridviewComponent = (props) => {
                         marginBottom: 32
                     }} />
             }
+            {showCate && <TextComponent
+                onPress={() => navigation.navigate('CategoryScreen')}
+                text={loadMoreText}
+                size={16}
+                color={appColors.blackLine}
+                style={{
+                    textDecorationLine: 'underline',
+                    fontWeight: '500',
+                    alignSelf: 'flex-end',
+                    marginBottom: 32
+                }} />}
         </View>
 
     )

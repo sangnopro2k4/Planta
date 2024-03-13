@@ -1,10 +1,10 @@
 import { ArrowRight } from 'iconsax-react-native'
-import React, { useEffect, useState } from 'react'
-import { FlatList, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import { ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
 import { GridviewComponent, ProductComponent, RowComponent, TextComponent } from '../Component'
 import { appColors, globalStyles, height } from '../contants'
-import { plants, plantas } from '../mock-data/plants'
+import { plantas, plants } from '../mock-data/plants'
 
 const HomeScreen = () => {
     return (
@@ -60,7 +60,7 @@ const HomeScreen = () => {
                         />
                     }
                     col={2}
-                    loadMore
+                    showCate
                     limitItem={4}
                     loadMoreText='Xem thêm cây trồng'
                 />
@@ -76,7 +76,7 @@ const HomeScreen = () => {
                         />
                     }
                     col={2}
-                    loadMore
+                    showCate
                     loadMoreText='Xem thêm phụ kiện'
                 />
 
