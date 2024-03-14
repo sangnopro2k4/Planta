@@ -4,7 +4,6 @@ import { appColors } from '../contants'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const InputComponent = (props) => {
-
     const {
         value,
         onChange,
@@ -31,7 +30,9 @@ const InputComponent = (props) => {
     };
 
     return (
-        <View style={[styles.input, styles.borderStyle, borderStyle, isFocused ? { borderColor: borderColorFocus, borderWidth: 2} : {}]}>
+        <View
+            style={[styles.input, styles.borderStyle, borderStyle,
+            isFocused ? { borderColor: borderColorFocus, borderWidth: 2 } : {}]}>
             <TextInput
                 value={value}
                 onChangeText={onChange}
@@ -40,10 +41,11 @@ const InputComponent = (props) => {
                 secureTextEntry={secure}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                style={{ flex: 1, }}
+                style={{ flex: 1 }}
             />
             {isPassword && (<TouchableOpacity>
-                <Icon name={secure ? 'eye' : 'eye-off'} onPress={() => setSecure(!secure)} size={20} color={appColors.gray} />
+                <Icon name={secure ? 'eye' : 'eye-off'}
+                    onPress={() => setSecure(!secure)} size={20} color={appColors.gray} />
             </TouchableOpacity>)}
             {isIcon && icon}
         </View>

@@ -61,7 +61,8 @@ const LoginScreen = ({ navigation }) => {
                         borderColorFocus={appColors.green}
                         isPassword
                     />
-                    {inValid && <TextComponent text='Invalid email or Password . Try Again !' color={appColors.red} style={{ fontWeight: '600' }} />}
+                    {inValid && <TextComponent text='Invalid email or Password . Try Again !'
+                        color={appColors.red} style={{ fontWeight: '600' }} />}
                 </View>
 
                 <RowComponent
