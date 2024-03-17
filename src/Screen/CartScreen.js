@@ -4,6 +4,9 @@ import { appColors, globalStyles, height, width } from '../contants'
 import { ButtonComponent, CartItemComponent, TextComponent, ToolBarComponent } from '../Component'
 import { ArrowLeft2, Bag, BagCross } from 'iconsax-react-native'
 import { plantas } from '../mock-data/plants'
+import Animated, { FadeIn, FadeOut, SlideInDown, SlideOutDown } from 'react-native-reanimated'
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
 const CartScreen = (props) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -49,12 +52,19 @@ const CartScreen = (props) => {
         ListEmptyComponent={<TextComponent text='Giỏ hàng của bạn hiện đang trống' size={14} color={appColors.blackLine} style={{ fontWeight: '400', alignSelf: 'center', paddingVertical: 15 }} />}
       />
       {
-
+        //Button
       }
       {
         isOpen && <>
-          <Pressable onPress={toggleBottomSheet} style={styles.overlay} />
-          <View style={styles.bottomSheet}>
+          <AnimatedPressable
+            entering={FadeIn}
+            exiting={FadeOut}
+            onPress={toggleBottomSheet}
+            style={styles.overlay} />
+          <Animated.View style={styles.bottomSheet}
+            entering={SlideInDown.springify().damping(15)}
+            exiting={SlideOutDown}
+          >
             <TextComponent text={'Xác nhận xóa ' + textDelete} size={16} color={appColors.blackLine} style={{ fontWeight: '500', marginBottom: 8 }} />
             <TextComponent text='Thao tác này sẽ không thể khôi phục' />
             <ButtonComponent text={'Đồng ý'} width='100%'
@@ -65,7 +75,7 @@ const CartScreen = (props) => {
             <TextComponent
               onPress={toggleBottomSheet}
               text='Hủy bỏ' size={16} color={appColors.blackLine} style={{ fontWeight: '500', textDecorationLine: 'underline' }} />
-          </View>
+          </Animated.View>
         </>
       }
     </View>
@@ -79,8 +89,8 @@ const styles = StyleSheet.create({
     padding: 24,
     bottom: 10,
     position: 'absolute',
-    shadowColor: appColors.grayLight,
-    elevation: 1,
+    shadowColor: appColors.white,
+    elevation: 10,
     backgroundColor: 'white',
     zIndex: 1,
     borderRadius: 8,
