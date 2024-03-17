@@ -6,7 +6,7 @@ import { GridviewComponent, ProductComponent, RowComponent, TextComponent } from
 import { appColors, globalStyles, height } from '../contants'
 import { plantas, plants } from '../mock-data/plants'
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
@@ -24,6 +24,7 @@ const HomeScreen = () => {
                             color={appColors.blackLine}
                         />
                         <TouchableOpacity
+                            onPress={() => props.navigation.navigate('CartScreen')}
                             style={{
                                 backgroundColor: appColors.white,
                                 padding: 14,
@@ -32,7 +33,8 @@ const HomeScreen = () => {
                             <Feather
                                 name='shopping-cart'
                                 size={24}
-                                color={appColors.black} />
+                                color={appColors.black}
+                            />
                         </TouchableOpacity>
                     </RowComponent>
 

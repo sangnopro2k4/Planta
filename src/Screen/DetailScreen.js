@@ -14,7 +14,7 @@ const DetailScreen = (props) => {
             <ToolBarComponent
                 title={mock.name}
                 iconLeft={<ArrowLeft2 color={appColors.black} size={24} onPress={() => navigation.goBack()} />}
-                iconRight={<ShoppingCart color={appColors.black} size={24} />}
+                iconRight={<ShoppingCart color={appColors.black} size={24} onPress={() => navigation.navigate('CartScreen')}/>}
             />
             <View style={styles.swiper}>
                 <Swiper

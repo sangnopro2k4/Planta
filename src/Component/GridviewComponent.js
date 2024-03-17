@@ -25,9 +25,14 @@ const GridviewComponent = (props) => {
             {textNode && textNode}
             <View style={styles.container}>
                 {plants.map((item) => {
-                    return (<TouchableOpacity onPress={() => navigation.navigate('DetailScreen')} key={item.id} style={{ width: 100 / col + '%' }}>
+                    return (
+                        <TouchableOpacity
+                        onPress={() => navigation.navigate('DetailScreen')}
+                        key={item.id}
+                        style={{ width: 100 / col + '%' }}>
                         {renderItems(item)}
-                    </TouchableOpacity>)
+                        </TouchableOpacity>
+                    )
                 })}
             </View>
             {data.length != plants.length

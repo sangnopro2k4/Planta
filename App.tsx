@@ -4,6 +4,9 @@ import {StatusBar, View} from 'react-native';
 import {globalStyles} from './src/contants';
 import AuthenStack from './src/navigation/AuthenStack';
 import MainStack from './src/navigation/MainStack';
+import HorizontalFlatlist from './src/Example/HorizontalFlatlist';
+import CartScreen from './src/Screen/CartScreen';
+import CartItemComponent from './src/Component/CartItemComponent';
 
 // const data = [
 //   {

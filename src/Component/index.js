@@ -6,6 +6,7 @@ import ProductComponent from "./ProductComponent"
 import GridviewComponent from "./GridviewComponent"
 import ToolBarComponent from "./ToolBarComponent"
 import ButtonComponent from "./ButtonComponent"
+import CartItemComponent from "./CartItemComponent"
 
 export {
     TextComponent,
@@ -15,5 +16,6 @@ export {
     ProductComponent,
     GridviewComponent,
     ToolBarComponent,
-    ButtonComponent
+    ButtonComponent,
+    CartItemComponent
 }

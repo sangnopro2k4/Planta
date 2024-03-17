@@ -39,32 +39,40 @@ const CategoriesScreen = (props) => {
         paddingHorizontal: 8,
         justifyContent: 'center'
       }}>
-      <TextComponent text={item.name} size={14} color={appColors.gray} />
+      <TextComponent text={item.name} size={14} color={selected === item.id ? appColors.white : appColors.blackLine} />
     </TouchableOpacity>
   )
+
+  const renderProduct = ({ item }) => {
+    return (
+      <TouchableOpacity onPress={() => props.navigation.navigate('DetailScreen')} style={{ flex: 0.5 }}>
+        <ProductComponent {...item} />
+      </TouchableOpacity>
+    )
+  }
 
   return (
     <View style={globalStyles.container}>
       <ToolBarComponent
-        iconLeft={<ArrowLeft2 color={appColors.black} size={24} />}
-        iconRight={<ShoppingCart color={appColors.black} size={24} />}
+        iconLeft={<ArrowLeft2 color={appColors.black} size={24} onPress={() => props.navigation.goBack()} />}
+        iconRight={<ShoppingCart color={appColors.black} size={24} onPress={() => props.navigation.navigate('CartScreen')} />}
         title='CÂY TRỒNG' />
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        horizontal={true}
-        keyExtractor={item => item.id}
-        style={{ marginBottom: 18 }}
-      />
-      <ScrollView>
-        <GridviewComponent
-          style={{ flex: 1 }}
-          data={plants}
-          renderItems={item => <ProductComponent {...item} />}
-          col={2}
-          limitItem={10}
+      <View style={{ flex: 1, paddingHorizontal: 14 }}>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          horizontal={true}
+          keyExtractor={item => item.id}
+          style={{ flexGrow: 0, marginBottom: 15 }}
         />
-      </ScrollView>
+        <FlatList
+          data={plants}
+          renderItem={renderProduct}
+          keyExtractor={item => item.id}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
 
     </View>
   );
