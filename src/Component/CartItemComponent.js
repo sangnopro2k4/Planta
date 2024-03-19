@@ -1,9 +1,10 @@
 import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { RowComponent, TextComponent } from '.'
 import { appColors, width } from '../contants'
 import { AddSquare, MinusSquare } from 'iconsax-react-native'
+import { MyContext } from './MyProvider'
 
 const CartItemComponent = (props) => {
     const {
@@ -11,20 +12,27 @@ const CartItemComponent = (props) => {
         id,
         price,
         img,
+        quantity,
+        stock,
         onChangeCheck,
-        toggleBottomSheet
+        toggleBottomSheet,
+        isCheck
     } = props
-    const [isSelected, setIsSelected] = useState(false)
-    const [qty, setQty] = useState(1)
-
+    const [isSelected, setIsSelected] = useState(isCheck)
+    const [qty, setQty] = useState(quantity)
+    const { cartMap, setCart } = useContext(MyContext)
+    const item = useRef(cartMap.current.get(id))
     const handlerQuantity = (count) => {
         const newQty = qty + count
         if (newQty <= 0) {
             toggleBottomSheet('delete_1', id)
-        } else if (newQty >= 10 + 1) {
+        } else if (newQty > stock) {
             console.log('giới hạn số lượng')
             return
         } else {
+            console.log(item)
+            item.current.quantity = newQty
+            cartMap.current.set(id, item.current)
             setQty(newQty)
         }
     }
@@ -34,13 +42,15 @@ const CartItemComponent = (props) => {
             <TouchableOpacity onPress={() => {
                 setIsSelected(!isSelected)
                 onChangeCheck(!isSelected)
+                item.current.isCheck = !isSelected
+                cartMap.current.set(id, item.current)
             }}
                 style={{ marginEnd: 28 }}
             >
                 <Icon name={isSelected ? 'checkbox-marked' : 'checkbox-blank-outline'} size={24} color={appColors.blackLine} />
             </TouchableOpacity>
 
-            <Image style={styles.img} source={img} />
+            <Image style={styles.img} source={{ uri: img }} />
 
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>

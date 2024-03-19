@@ -4,9 +4,10 @@ import { TextComponent } from '.'
 import { globalStyles } from '../contants'
 
 const ButtonComponent = (props) => {
-    const {text, textStyle, style, width, height, onPress} = props
+    const {text, textStyle, style, width, height, onPress, isDisable} = props
     return (
         <TouchableOpacity
+            disabled={isDisable}
             onPress={onPress}
             style={[
                 globalStyles.button,

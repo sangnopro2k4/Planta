@@ -1,10 +1,10 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import { appColors, globalStyles, height, width } from '../contants'
-import { ButtonComponent, CartItemComponent, TextComponent, ToolBarComponent } from '../Component'
-import { ArrowLeft2, Bag, BagCross } from 'iconsax-react-native'
-import { plantas } from '../mock-data/plants'
+import { ArrowLeft2, BagCross } from 'iconsax-react-native'
+import React, { useContext, useState } from 'react'
+import { FlatList, Pressable, StyleSheet, View } from 'react-native'
 import Animated, { FadeIn, FadeOut, SlideInDown, SlideOutDown } from 'react-native-reanimated'
+import { ButtonComponent, CartItemComponent, TextComponent, ToolBarComponent } from '../Component'
+import { MyContext } from '../Component/MyProvider'
+import { appColors, globalStyles, width } from '../contants'
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
@@ -12,6 +12,7 @@ const CartScreen = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [idDelete, setIdDelete] = useState(-1)
   const [textDelete, setTextDelete] = useState('')
+  const { cart, setCart, cartMap } = useContext(MyContext)
 
   const renderCart = ({ item }) => {
     return <CartItemComponent
@@ -27,6 +28,7 @@ const CartScreen = (props) => {
         setTextDelete(`đơn hàng có id: ${id}`)
         break
       case 'delete_all':
+        setIdDelete(-999)
         setTextDelete('tất cả đơn hàng')
         break
     }
@@ -34,19 +36,32 @@ const CartScreen = (props) => {
   }
 
   const handleData = () => {
-    console.log('đã xóa ')
+    if (idDelete === -999) {
+      cartMap.current.clear()
+      setCart([])
+      setIsOpen(!isOpen)
+      setIdDelete(-1)
+    } else if (idDelete) {
+      cartMap.current.delete(idDelete)
+      setCart([...cartMap.current.values()])
+      setIsOpen(!isOpen)
+      setIdDelete(-1)
+    }
   }
 
   return (
     <View style={globalStyles.container}>
       <ToolBarComponent
-        iconLeft={<ArrowLeft2 color={appColors.black} size={24} onPress={() => props.navigation.goBack()} />}
+        iconLeft={<ArrowLeft2 color={appColors.black} size={24} onPress={() => {
+          setCart([...cartMap.current.values()])
+          props.navigation.goBack()
+        }} />}
         title='GIỎ HÀNG'
         iconRight={<BagCross color={appColors.black} size={24} onPress={() => toggleBottomSheet('delete_all')} />}
       />
 
       <FlatList
-        data={plantas}
+        data={cart}
         renderItem={renderCart}
         keyExtractor={item => item.id}
         ListEmptyComponent={<TextComponent text='Giỏ hàng của bạn hiện đang trống' size={14} color={appColors.blackLine} style={{ fontWeight: '400', alignSelf: 'center', paddingVertical: 15 }} />}

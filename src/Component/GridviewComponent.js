@@ -5,7 +5,7 @@ import { appColors } from '../contants'
 import { NavigationContext } from '@react-navigation/native'
 
 const GridviewComponent = (props) => {
-    const { data, renderItems, col, textNode, style, loadMore, loadMoreText, limitItem, showCate } = props
+    const { data, renderItems, col, textNode, style, loadMore, loadMoreText, limitItem, showCate, id } = props
     const [plants, setPlants] = useState(data.slice(0, limitItem))
     const [isLoading, setIsLoading] = useState(false)
     const navigation = useContext(NavigationContext)
@@ -27,10 +27,10 @@ const GridviewComponent = (props) => {
                 {plants.map((item) => {
                     return (
                         <TouchableOpacity
-                        onPress={() => navigation.navigate('DetailScreen')}
-                        key={item.id}
-                        style={{ width: 100 / col + '%' }}>
-                        {renderItems(item)}
+                            onPress={() => navigation.navigate('DetailScreen', {id: item.id})}
+                            key={item.id}
+                            style={{ width: 100 / col + '%' }}>
+                            {renderItems(item)}
                         </TouchableOpacity>
                     )
                 })}
@@ -38,16 +38,16 @@ const GridviewComponent = (props) => {
             {data.length != plants.length
                 && !isLoading && loadMore && !showCate
                 && <TextComponent
-                onPress={() => handleData()}
-                text={loadMoreText}
-                size={16}
-                color={appColors.blackLine}
-                style={{
-                    textDecorationLine: 'underline',
-                    fontWeight: '500',
-                    alignSelf: 'flex-end',
-                    marginBottom: 32
-                }} />}
+                    onPress={() => handleData()}
+                    text={loadMoreText}
+                    size={16}
+                    color={appColors.blackLine}
+                    style={{
+                        textDecorationLine: 'underline',
+                        fontWeight: '500',
+                        alignSelf: 'flex-end',
+                        marginBottom: 32
+                    }} />}
             {
                 isLoading && <ActivityIndicator
                     size="small"
@@ -58,7 +58,7 @@ const GridviewComponent = (props) => {
                     }} />
             }
             {showCate && <TextComponent
-                onPress={() => navigation.navigate('CategoryScreen')}
+                onPress={() => navigation.navigate('CategoryScreen', {id: id})}
                 text={loadMoreText}
                 size={16}
                 color={appColors.blackLine}

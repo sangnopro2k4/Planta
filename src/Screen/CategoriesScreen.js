@@ -1,32 +1,40 @@
 import { ArrowLeft2, ShoppingCart } from 'iconsax-react-native';
-import React, { useState } from 'react';
-import { FlatList, ScrollView, TouchableOpacity, View } from 'react-native';
-import { GridviewComponent, ProductComponent, TextComponent, ToolBarComponent } from '../Component';
+import React, { useEffect, useRef, useState } from 'react';
+import { FlatList, TouchableOpacity, View } from 'react-native';
+import { ProductComponent, TextComponent, ToolBarComponent } from '../Component';
 import { appColors, globalStyles } from '../contants';
-import { plants } from '../mock-data/plants';
+import { categories, getAllCategories, getCate, getProductList, getProducts } from '../mock-data/data';
 
-const data = [
-  {
-    id: 1,
-    name: 'Tất cả',
-  },
-  {
-    id: 2,
-    name: 'Hàng mới về'
-  },
-  {
-    id: 3,
-    name: 'Ưa bóng'
-  },
-  {
-    id: 4,
-    name: 'Ưa sáng'
-  }
-]
 
 const CategoriesScreen = (props) => {
+  const id = props.route.params.id
+  console.log(id)
+  const [list, setList] = useState([])
+  const [listProduct, setListProduct] = useState([])
+  const refProductList = useRef(null)
+  const [selected, setselected] = useState(id)
 
-  const [selected, setselected] = useState(1)
+  useEffect(() => {
+    const cate = getCate(getAllCategories(categories, id))
+    cate[0].name = 'Tất cả'
+    setList(cate)
+  }, [id])
+
+  useEffect(() => {
+    let listP = []
+    if (selected === id) {
+      listP = getProducts(0, getAllCategories(categories, id))
+    } else {
+      listP = getProductList(selected)
+    }
+    setListProduct(listP)
+    refProductList?.current?.scrollToOffset({
+      animated: true,
+      offset: 0
+    })
+  }, [selected])
+
+
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -45,7 +53,7 @@ const CategoriesScreen = (props) => {
 
   const renderProduct = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => props.navigation.navigate('DetailScreen')} style={{ flex: 0.5 }}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('DetailScreen', {id: item.id})} style={{ flex: 0.5 }}>
         <ProductComponent {...item} />
       </TouchableOpacity>
     )
@@ -59,20 +67,23 @@ const CategoriesScreen = (props) => {
         title='CÂY TRỒNG' />
       <View style={{ flex: 1, paddingHorizontal: 14 }}>
         <FlatList
-          data={data}
+          data={list}
           renderItem={renderItem}
           horizontal={true}
           keyExtractor={item => item.id}
           style={{ flexGrow: 0, marginBottom: 15 }}
         />
         <FlatList
-          data={plants}
+          ref={refProductList}
+          data={listProduct}
           renderItem={renderProduct}
           keyExtractor={item => item.id}
           numColumns={2}
           showsVerticalScrollIndicator={false}
         />
       </View>
+
+
 
     </View>
   );

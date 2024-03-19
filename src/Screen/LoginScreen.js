@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Image, StyleSheet, TouchableOpacity, View, ScrollView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/AntDesign'
@@ -6,6 +6,7 @@ import { InputComponent, RowComponent, SpaceComponent, TextComponent } from '../
 import Facebook from '../assets/svgs/facebook'
 import Google from '../assets/svgs/google'
 import { appColors, globalStyles, height } from '../contants'
+import { MyContext } from '../Component/MyProvider'
 
 
 const LoginScreen = ({ navigation }) => {
@@ -13,19 +14,17 @@ const LoginScreen = ({ navigation }) => {
     const [email, setemail] = useState('')
     const [password, setpassword] = useState('')
     const [inValid, setinValid] = useState(false)
+    const { setIsLogin } = useContext(MyContext)
 
     const handleLogin = async () => {
         if (email === '' || password === '') {
             setinValid(true)
             return
         } else {
+            setIsLogin(true)
             setinValid(false)
         }
-        const response = await fetch(`http://172.16.80.87:3000/authen?user=${email}&pass=${password}`)
-        const data = await response.json()
-        console.log(data)
     }
-
 
     return (
         <ScrollView style={[globalStyles.container]}>
@@ -61,7 +60,7 @@ const LoginScreen = ({ navigation }) => {
                         borderColorFocus={appColors.green}
                         isPassword
                     />
-                    {inValid && <TextComponent text='Invalid email or Password . Try Again !'
+                    {inValid && <TextComponent text='Invalid email or Password. Try Again !'
                         color={appColors.red} style={{ fontWeight: '600' }} />}
                 </View>
 

@@ -5,8 +5,13 @@ import Feather from 'react-native-vector-icons/Feather'
 import { GridviewComponent, ProductComponent, RowComponent, TextComponent } from '../Component'
 import { appColors, globalStyles, height } from '../contants'
 import { plantas, plants } from '../mock-data/plants'
+import { categories, getAllCategories, getProducts } from '../mock-data/data'
+
+const product = getProducts(0, getAllCategories(categories, 1))
+const tools = getProducts(2)
 
 const HomeScreen = (props) => {
+
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
@@ -52,7 +57,7 @@ const HomeScreen = (props) => {
                 }
             }>
                 <GridviewComponent
-                    data={plants}
+                    data={product}
                     renderItems={item => <ProductComponent {...item} />}
                     textNode={
                         <TextComponent text='Cây trồng'
@@ -65,11 +70,12 @@ const HomeScreen = (props) => {
                     showCate
                     limitItem={4}
                     loadMoreText='Xem thêm cây trồng'
+                    id={1}
                 />
 
                 <GridviewComponent
-                    data={plantas}
-                    renderItems={item => <ProductComponent type='planta' {...item} />}
+                    data={tools}
+                    renderItems={item => <ProductComponent {...item} />}
                     textNode={
                         <TextComponent text='Chậu cây trồng'
                             color={appColors.blackLine}
@@ -79,7 +85,9 @@ const HomeScreen = (props) => {
                     }
                     col={2}
                     showCate
+                    limitItem={4}
                     loadMoreText='Xem thêm phụ kiện'
+                    id={2}
                 />
 
             </View>
