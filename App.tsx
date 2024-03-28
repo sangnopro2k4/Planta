@@ -12,14 +12,14 @@ import DetailHandBookScreen from './src/Screen/DetailHandBookScreen';
 
 const App = () => {
   return (
-    <MyProvider>
-      <Main />
-    </MyProvider>
-    // <View style={globalStyles.container}>
-    //   <StatusBar translucent />
-    //   {/* <HandBookScreen /> */}
-    //   <DetailHandBookScreen />
-    // </View>
+    // <MyProvider>
+    //   <Main />
+    // </MyProvider>
+    <View style={globalStyles.container}>
+      <StatusBar translucent />
+      {/* <HandBookScreen /> */}
+      <DetailHandBookScreen />
+    </View>
   );
 };
 

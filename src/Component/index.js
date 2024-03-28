@@ -7,6 +7,7 @@ import GridviewComponent from "./GridviewComponent"
 import ToolBarComponent from "./ToolBarComponent"
 import ButtonComponent from "./ButtonComponent"
 import CartItemComponent from "./CartItemComponent"
+import CollapseComponent from "./CollapseComponent"
 
 export {
     TextComponent,
@@ -17,5 +18,6 @@ export {
     GridviewComponent,
     ToolBarComponent,
     ButtonComponent,
-    CartItemComponent
+    CartItemComponent,
+    CollapseComponent
 }
