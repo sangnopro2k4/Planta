@@ -8,16 +8,18 @@ import {SearchScreen} from './src/Screen';
 import ProfileScreen from './src/Screen/ProfileScreen';
 import EditProfile from './src/Screen/EditProfile';
 import HandBookScreen from './src/Screen/HandBookScreen';
+import DetailHandBookScreen from './src/Screen/DetailHandBookScreen';
 
 const App = () => {
   return (
-    // <MyProvider>
-    //   <Main />
-    // </MyProvider>
-    <View style={globalStyles.container}>
-      <StatusBar translucent />
-      <HandBookScreen />
-    </View>
+    <MyProvider>
+      <Main />
+    </MyProvider>
+    // <View style={globalStyles.container}>
+    //   <StatusBar translucent />
+    //   {/* <HandBookScreen /> */}
+    //   <DetailHandBookScreen />
+    // </View>
   );
 };
 

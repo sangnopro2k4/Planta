@@ -20,10 +20,31 @@ const LoginScreen = ({ navigation }) => {
         if (email === '' || password === '') {
             setinValid(true)
             return
-        } else {
-            setIsLogin(true)
-            setinValid(false)
         }
+        setinValid(false)
+        const body = {
+            username: email.trim(),
+            password: password.trim()
+        }
+
+        const response = await fetch('http://172.16.122.75:3000/user',
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                method: 'POST',
+                body: JSON.stringify(body)
+            }
+        )
+        const data = await response.json()
+        if (data.status) {
+            setIsLogin(true)
+        } else {
+            setIsLogin(false)
+            setinValid(true)
+        }
+        console.log("Info: ", data)
     }
 
     return (
