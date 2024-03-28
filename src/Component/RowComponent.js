@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { Children } from 'react'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
 
 const RowComponent = (props) => {
     const { children, justify, style, flex = 0, width, height, alignItems } = props
@@ -10,7 +10,8 @@ const RowComponent = (props) => {
             justifyContent: justify ?? 'flex-start',
             flex: flex,
             width: width ?? 'auto',
-            height: height ?? 'auto'
+            height: height ?? 'auto',
+            padding: 0
         }, style]}>
             {children}
         </View>

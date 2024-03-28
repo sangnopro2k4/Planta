@@ -1,8 +1,8 @@
-import { ArrowLeft2, BagCross } from 'iconsax-react-native'
+import { ArrowLeft2, ArrowRight2, BagCross } from 'iconsax-react-native'
 import React, { useContext, useState } from 'react'
-import { FlatList, Pressable, StyleSheet, View } from 'react-native'
+import { FlatList, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native'
 import Animated, { FadeIn, FadeOut, SlideInDown, SlideOutDown } from 'react-native-reanimated'
-import { ButtonComponent, CartItemComponent, TextComponent, ToolBarComponent } from '../Component'
+import { ButtonComponent, CartItemComponent, RowComponent, TextComponent, ToolBarComponent } from '../Component'
 import { MyContext } from '../Component/MyProvider'
 import { appColors, globalStyles, width } from '../contants'
 
@@ -12,7 +12,7 @@ const CartScreen = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [idDelete, setIdDelete] = useState(-1)
   const [textDelete, setTextDelete] = useState('')
-  const { cart, setCart, cartMap } = useContext(MyContext)
+  const { cart, setCart, cartMap, holderPay } = useContext(MyContext)
 
   const renderCart = ({ item }) => {
     return <CartItemComponent
@@ -64,10 +64,25 @@ const CartScreen = (props) => {
         data={cart}
         renderItem={renderCart}
         keyExtractor={item => item.id}
+        style={{ flex: 1 }}
         ListEmptyComponent={<TextComponent text='Giỏ hàng của bạn hiện đang trống' size={14} color={appColors.blackLine} style={{ fontWeight: '400', alignSelf: 'center', paddingVertical: 15 }} />}
       />
+
       {
-        //Button
+        !isOpen &&
+        <View style={{ paddingHorizontal: 21, width: '100%', paddingBottom: 21 }}>
+          <RowComponent justify='space-between' style={{ paddingVertical: 12 }}>
+            <TextComponent text='Tạm tính' size={14} color={appColors.gray} />
+            <TextComponent text='500.000đ' size={14} color={appColors.black} />
+          </RowComponent>
+
+          <TouchableOpacity style={{ paddingHorizontal: 30, paddingVertical: 20, backgroundColor: appColors.green, borderRadius: 8 }} >
+            <RowComponent>
+              <TextComponent text='Tiến hành thanh toán' style={{ flex: 1 }} size={18} color={appColors.white} />
+              <ArrowRight2 size={24} color={appColors.white} />
+            </RowComponent>
+          </TouchableOpacity>
+        </View>
       }
       {
         isOpen && <>
@@ -99,7 +114,7 @@ const CartScreen = (props) => {
 
 export default CartScreen
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   bottomSheet: {
     padding: 24,
     bottom: 10,

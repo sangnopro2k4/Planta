@@ -13,7 +13,6 @@ export const appColors = {
     redLight: '#FF0000'
 }
 
-
 export const globalStyles = StyleSheet.create({
     text: {
         fontFamily: 'Poppins',
@@ -26,7 +25,9 @@ export const globalStyles = StyleSheet.create({
         width: '100%',
         height: 'auto',
         paddingVertical: 10,
-        borderRadius: 15
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     label: {
         color: 'black',

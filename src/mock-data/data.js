@@ -66,6 +66,29 @@ const products = [
     { "id": 30, "name": "Emory's Milkvetch", "category_id": 2, "price": 78, "img": "http://dummyimage.com/167x163.png/dddddd/000000", "size": "3XL", "quantity": 85, "origin": "Vysotskoye" }
 ]
 
+const transportMethods = [
+    {
+        id: 1,
+        name: 'Giao hàng nhanh',
+        price: '15.000đ',
+    },
+    {
+        id: 2,
+        name: 'Giao hàng COD',
+        price: '20.000đ'
+    }
+]
+
+const paymentMethod = [
+    {
+        id: 1,
+        name: 'THẺ VISA/MASTERCARD'
+    },
+    {
+        id: 2,
+        name: 'THẺ ATM'
+    }
+]
 const getAllCategories = (collection, _id) => {
     return collection.reduce((total, curr) => {
         if (_id === curr.parent_id) {
@@ -93,14 +116,14 @@ const getNameCate = (_id) => {
 
 const getDetailProduct = (product_id) => {
     return products.find(item => item.id === product_id)
-} 
+}
 
 const getCate = (ids) => {
     return categories.filter(item => ids.includes(item.id)).map(item => ({
         id: item.id,
         name: item.name
     }))
-}   
+}
 
 export {
     products,
@@ -110,5 +133,7 @@ export {
     getNameCate,
     getDetailProduct,
     getProductList,
-    getCate
+    getCate,
+    transportMethods,
+    paymentMethod
 }
